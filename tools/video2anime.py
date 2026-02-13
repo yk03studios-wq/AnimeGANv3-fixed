@@ -10,6 +10,8 @@ import onnxruntime as ort
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
+RESAMPLE_LANCZOS = Image.Resampling.LANCZOS if hasattr(Image, "Resampling") else Image.LANCZOS
+
 def parse_args():
     desc = "Tensorflow implementation of AnimeGANv3"
     parser = argparse.ArgumentParser(description=desc)
@@ -74,7 +76,7 @@ class Videocap:
             return 256 if x < 256 else x - x % 8
 
     def process_frame(self, img, width, height):
-        img = Image.fromarray(img[:,:,::-1]).resize((width, height), Image.ANTIALIAS)
+        img = Image.fromarray(img[:,:,::-1]).resize((width, height), RESAMPLE_LANCZOS)
         img = np.array(img).astype(np.float32) / 127.5 - 1.0
         return np.expand_dims(img, axis=0)
 
@@ -94,7 +96,7 @@ class Cartoonizer():
     def post_precess(self, img, wh):
         img = (img.squeeze() + 1.) / 2 * 255
         img = img.clip(0, 255).astype(np.uint8)
-        img = Image.fromarray(img).resize((wh[0], wh[1]), Image.ANTIALIAS)
+        img = Image.fromarray(img).resize((wh[0], wh[1]), RESAMPLE_LANCZOS)
         img = np.array(img).astype(np.uint8)
         return img
 
