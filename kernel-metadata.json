@@ -1,6 +1,6 @@
 {
   "id": "yashkawade03/animeconverter",
-  "title": "AnimeGAN Batch Run",
+  "title": "animeconverter",
   "code_file": "animeconverter.ipynb",
   "language": "python",
   "kernel_type": "notebook",
