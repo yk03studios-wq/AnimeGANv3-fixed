@@ -1,0 +1,9 @@
+{
+  "id": "yashkawade03/animeconverter",
+  "title": "AnimeGAN Batch Run",
+  "code_file": "animeconverter.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true
+}
